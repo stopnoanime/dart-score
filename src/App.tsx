@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { PlayersEntryTable } from "./PlayersEntryTable";
 import { GameType, GameTypeSelector } from './GameTypeSelector';
 import { createPlayer, PlayerData } from './player';
+import { GameScreen } from './GameScreen';
 
 type GameState = "setup" | "game" | "end";
 
@@ -19,12 +20,25 @@ function App() {
   }
 
   function playerEdit(id: number, newName: string) {
-    setPlayersData(playersData.map(p => p.id == id ? {...p, name: newName} : p))
+    setPlayersData(playersData.map(p => p.id === id ? {...p, name: newName} : p))
   }
 
   function startGame() {
     setPlayersData(playersData.map(p => ({...p, turns: [{score: Number(gameType), turnScore: -1, turnValid: true}]})));
     setGameState("game")
+  }
+
+  function turnEnd(playerId: number, turnScore: number) {
+    setPlayersData(playersData.map(p => {
+      if(p.id !== playerId)
+        return p;
+
+      const lastScore = p.turns[p.turns.length - 1].score;
+      const turnValid = turnScore <= lastScore;
+      const newScore = turnValid ? (lastScore - turnScore) : lastScore;
+
+      return {...p, turns: [...p.turns, {score: newScore, turnScore: turnScore, turnValid: turnValid }]}
+    }))
   }
 
   return (
@@ -34,6 +48,12 @@ function App() {
           <PlayersEntryTable playersData={playersData} onPlayerAdd={playerAdd} onPlayerDelete={playerDelete} onPlayerEdit={playerEdit}/>
           <GameTypeSelector type={gameType} onTypeChange={type => setGameType(type)}></GameTypeSelector>
           <button onClick={startGame}>Start</button>
+        </>
+      }
+
+      {gameState === "game" && 
+        <>
+          <GameScreen playersData={playersData} onTurnEnd={turnEnd}/>
         </>
       }
     </>
