@@ -31,7 +31,7 @@ export function GameScreen(props:
       <>
         {player.name}<br/>
         score : {playerLastScore}<br/>
-        {scores.map((v, i) => <input type="number" autoFocus={i==0} ref={i==0 ? focusInputRef : null} value={v} onChange={(e) => updateInputValue(i, e.target.value)}/>)}
+        {scores.map((v, i) => <input type="number" autoFocus={i==0} ref={i==0 ? focusInputRef : null} onFocus={e => e.target.select()} value={v} onChange={(e) => updateInputValue(i, e.target.value)}/>)}
         <button onClick={endTurn}>End turn</button>
       </>
   )
