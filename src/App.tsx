@@ -1,33 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { PlayersEntryTable } from "./PlayersEntryTable";
+import { GameType, GameTypeSelector } from './GameTypeSelector';
+import { createPlayer, PlayerData } from './player';
+
+type GameState = "setup" | "game" | "end";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [playersData, setPlayersData] = useState<PlayerData[]>([createPlayer(0)])
+  const [gameType, setGameType] = useState<GameType>("501")
+  const [gameState, setGameState] = useState<GameState>("setup")
+
+  function playerAdd() {
+    setPlayersData([...playersData, createPlayer(playersData.length)])
+  }
+
+  function playerDelete(id: number) {
+    setPlayersData(playersData.filter(p => p.id != id))
+  }
+
+  function playerEdit(id: number, newName: string) {
+    setPlayersData(playersData.map(p => p.id == id ? {...p, name: newName} : p))
+  }
+
+  function startGame() {
+    setPlayersData(playersData.map(p => ({...p, turns: [{score: Number(gameType), turnScore: -1, turnValid: true}]})));
+    setGameState("game")
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {gameState === "setup" && 
+        <>
+          <PlayersEntryTable playersData={playersData} onPlayerAdd={playerAdd} onPlayerDelete={playerDelete} onPlayerEdit={playerEdit}/>
+          <GameTypeSelector type={gameType} onTypeChange={type => setGameType(type)}></GameTypeSelector>
+          <button onClick={startGame}>Start</button>
+        </>
+      }
     </>
   )
 }
