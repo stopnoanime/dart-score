@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { PlayerData } from "../playerData";
 import { GamePlayerCard } from "./GamePlayerCard";
-import { ScoreBoard } from "../endScreen/Scoreboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,6 +12,9 @@ export function GameScreen(props: {
   const [currentRound, setCurrentRound] = useState(1);
   const [playerIndex, setPlayerIndex] = useState(0);
 
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupPlayer, setPopupPlayer] = useState<PlayerData>();
+
   const player = props.playersData[playerIndex];
 
   function handleTurnEnd(turnScore: number) {
@@ -20,6 +22,11 @@ export function GameScreen(props: {
     const newScore = player.score - (turnValid ? turnScore : 0);
     const hasWon = newScore === 0;
     const newWonAtRound = hasWon ? currentRound : -1;
+
+    if(hasWon) {
+      setPopupPlayer(player)
+      setShowPopup(true);
+    }
 
     props.onPlayersDataChange((d) =>
       d.map((p) =>
@@ -87,6 +94,20 @@ export function GameScreen(props: {
         player={player}
         onTurnEnd={handleTurnEnd}
       />
+
+      { showPopup && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 grid place-items-center bg-opacity-40 bg-black">
+          <div className="card flex flex-col gap-4">
+            <span className="text-xl">{popupPlayer?.name} has won!</span>
+            <button
+              className="button"
+              onClick={() => setShowPopup(false)}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
