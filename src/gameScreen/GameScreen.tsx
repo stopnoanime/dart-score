@@ -28,7 +28,7 @@ export function GameScreen(props: {
     })),
   );
 
-  const [currentRound, setCurrentRound] = useState(0);
+  const [currentRound, setCurrentRound] = useState(1);
   const [playerIndex, setPlayerIndex] = useState(0);
 
   const player = gamePlayersData[playerIndex];
@@ -79,8 +79,20 @@ export function GameScreen(props: {
 
   return (
     <>
-      Round: {currentRound}
-      <br />
+      <div className="absolute left-4 top-4 text-xl">
+        <table>
+          <tr>
+            <td className="pr-1">Round</td>
+            <td className="text-center">{currentRound}</td>
+          </tr>
+          <tr>
+            <td>Player</td>
+            <td>
+              {playerIndex + 1} / {gamePlayersData.length}
+            </td>
+          </tr>
+        </table>
+      </div>
       <GamePlayerCard
         key={currentRound + player.id}
         player={player}

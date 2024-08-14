@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PlayerData } from "./setupScreen/playerData";
+import { createPlayerData, PlayerData } from "./setupScreen/playerData";
 import { GameType } from "./setupScreen/GameTypeSelector";
 import { GameScreen } from "./gameScreen/GameScreen";
 import { SetupScreen } from "./setupScreen/SetupScreen";
@@ -8,7 +8,9 @@ import { EndScreen } from "./endScreen/EndScreen";
 type GameState = "setup" | "game" | "end";
 
 export default function App() {
-  const [playersData, setPlayersData] = useState<PlayerData[]>([]);
+  const [playersData, setPlayersData] = useState<PlayerData[]>([
+    createPlayerData(0),
+  ]);
   const [gameType, setGameType] = useState<GameType>("501");
   const [gameState, setGameState] = useState<GameState>("setup");
 

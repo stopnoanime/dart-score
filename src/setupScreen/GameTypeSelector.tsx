@@ -9,19 +9,21 @@ export function GameTypeSelector(props: {
   }
 
   return (
-    <>
-      <label>
+    <fieldset>
+      <legend>Game Type:</legend>
+      <label className="mr-4 inline-flex items-center gap-1">
         <input
           type="radio"
           name="gameType"
           value="501"
+          className="m-0"
           checked={props.gameType == "501"}
           onChange={onChange}
         />
         501
       </label>
 
-      <label>
+      <label className="inline-flex items-center gap-1">
         <input
           type="radio"
           name="gameType"
@@ -31,6 +33,6 @@ export function GameTypeSelector(props: {
         />
         301
       </label>
-    </>
+    </fieldset>
   );
 }

@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createPlayerData, PlayerData } from "./playerData";
 import { PlayerEntryCard } from "./PlayerEntryCard";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export function PlayersEntryTable(props: {
   playersData: PlayerData[];
@@ -23,8 +25,8 @@ export function PlayersEntryTable(props: {
   }
 
   return (
-    <div>
-      <ol>
+    <div className="card">
+      <ol className="flex gap-6 flex-wrap items-center justify-center px-2">
         {props.playersData.map((p) => (
           <li key={p.id}>
             <PlayerEntryCard
@@ -34,8 +36,12 @@ export function PlayersEntryTable(props: {
             />
           </li>
         ))}
+        <li>
+          <button onClick={handlePlayerAdd} title="Add player">
+            <FontAwesomeIcon icon={faPlus} size="lg" />
+          </button>
+        </li>
       </ol>
-      <button onClick={handlePlayerAdd}>Add Player</button>
     </div>
   );
 }

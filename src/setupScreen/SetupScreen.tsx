@@ -11,20 +11,27 @@ export function SetupScreen(props: {
 }) {
   return (
     <>
+      <h1 className="text-6xl">Dart Score Keeping</h1>
+
       <PlayersEntryTable
         playersData={props.playersData}
         onPlayersDataChange={props.onPlayersDataChange}
       />
-      <GameTypeSelector
-        gameType={props.gameType}
-        onGameTypeChange={props.onGameTypeChange}
-      ></GameTypeSelector>
-      <button
-        onClick={props.onGameStart}
-        disabled={props.playersData.length === 0}
-      >
-        Start
-      </button>
+
+      <div className="card flex gap-8 items-center">
+        <GameTypeSelector
+          gameType={props.gameType}
+          onGameTypeChange={props.onGameTypeChange}
+        ></GameTypeSelector>
+
+        <button
+          className="button"
+          onClick={props.onGameStart}
+          disabled={props.playersData.length === 0}
+        >
+          Start Game
+        </button>
+      </div>
     </>
   );
 }

@@ -1,9 +1,31 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+:root {
+  @apply font-sans bg-neutral-800 text-neutral-100;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  @apply container mx-auto min-h-full flex flex-col items-center justify-evenly gap-8 p-8;
+}
+
+.card {
+  @apply bg-neutral-700 rounded-2xl p-5;
+}
+
+input[type="text"],
+input[type="number"] {
+  @apply bg-transparent border-2 border-solid border-neutral-800 rounded-lg p-2 w-32;
+}
+
+.button {
+  @apply bg-green-700 px-4 py-2 rounded-lg disabled:opacity-50;
 }

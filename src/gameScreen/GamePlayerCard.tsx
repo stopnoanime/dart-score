@@ -14,26 +14,33 @@ export function GamePlayerCard(props: {
   }
 
   return (
-    <>
-      {props.player.name}
-      <br />
-      score : {props.player.score}
-      <br />
-      {scores.map((v, i) => (
-        <input
-          type="number"
-          key={i}
-          autoFocus={i == 0}
-          onFocus={(e) => e.target.select()}
-          value={v}
-          onChange={(e) => handleInputChange(i, e.target.value)}
-        />
-      ))}
+    <div className="card flex flex-col gap-8 items-center">
+      <span className="text-4xl">{props.player.name}</span>
+      <span className="-mt-5">Total Score: {props.player.score}</span>
+
+      <div className="flex gap-4">
+        {scores.map((v, i) => (
+          <div>
+            <input
+              className="!w-16"
+              type="number"
+              key={i}
+              autoFocus={i == 0}
+              onFocus={(e) => e.target.select()}
+              value={v}
+              onChange={(e) => handleInputChange(i, e.target.value)}
+            />
+            <div className="text-xs text-center mt-1 font-thin">Throw {i}</div>
+          </div>
+        ))}
+      </div>
+
       <button
+        className="button"
         onClick={() => props.onTurnEnd(scores.reduce((a, b) => +a + +b, 0))}
       >
         End turn
       </button>
-    </>
+    </div>
   );
 }
