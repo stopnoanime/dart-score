@@ -4,6 +4,7 @@
 
 :root {
   @apply font-sans bg-neutral-800 text-neutral-100;
+  color-scheme: dark;
 }
 
 html,
@@ -18,7 +19,7 @@ body,
 }
 
 .card {
-  @apply bg-neutral-700 rounded-2xl p-5;
+  @apply bg-neutral-700 rounded-2xl p-5 max-w-full overflow-x-auto;
 }
 
 .styled-input {
@@ -31,4 +32,8 @@ body,
 
 .scoreTable th,.scoreTable td {
   @apply px-2 py-1 text-center
+}
+
+.playerName {
+  @apply overflow-hidden text-ellipsis max-w-full text-center
 }

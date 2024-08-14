@@ -7,7 +7,7 @@ export function EndScreen(props: {
 }) {
   return (
     <>
-      <h1 className="text-6xl">End Results</h1>
+      <h1 className="text-6xl text-center">End Results</h1>
 
       <ScoreBoard playersData={props.playersData}/>
       

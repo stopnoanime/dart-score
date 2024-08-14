@@ -96,9 +96,9 @@ export function GameScreen(props: {
       />
 
       { showPopup && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 grid place-items-center bg-opacity-40 bg-black">
+        <div className="absolute top-0 left-0 right-0 bottom-0 grid place-items-center bg-opacity-40 bg-black p-4">
           <div className="card flex flex-col gap-4">
-            <span className="text-xl">{popupPlayer?.name} has won!</span>
+            <span className="text-xl playerName">{popupPlayer?.name} has won!</span>
             <button
               className="button"
               onClick={() => setShowPopup(false)}

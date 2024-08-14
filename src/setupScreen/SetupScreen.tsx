@@ -11,7 +11,7 @@ export function SetupScreen(props: {
 }) {
   return (
     <>
-      <h1 className="text-6xl">Dart Score Keeping</h1>
+      <h1 className="text-6xl text-center">Dart Score Keeper</h1>
 
       <PlayersEntryTable
         playersData={props.playersData}
