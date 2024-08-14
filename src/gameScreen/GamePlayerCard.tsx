@@ -29,7 +29,9 @@ export function GamePlayerCard(props: {
               value={v}
               onChange={(e) => handleInputChange(i, e.target.value)}
             />
-            <div className="text-xs text-center mt-1 font-thin">Throw {i + 1}</div>
+            <div className="text-xs text-center mt-1 font-thin">
+              Throw {i + 1}
+            </div>
           </div>
         ))}
       </div>

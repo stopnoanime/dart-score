@@ -15,8 +15,10 @@ export default function App() {
   const [gameState, setGameState] = useState<GameState>("setup");
 
   function handleGameStart() {
-    setPlayersData(d => d.map(p => ({...p, score: +gameType, wonAtRound: -1, turns: []})))
-    setGameState("game")
+    setPlayersData((d) =>
+      d.map((p) => ({ ...p, score: +gameType, wonAtRound: -1, turns: [] })),
+    );
+    setGameState("game");
   }
 
   return (
@@ -40,7 +42,10 @@ export default function App() {
       )}
 
       {gameState === "end" && (
-        <EndScreen playersData={playersData} onGameRestart={() => setGameState("setup")} />
+        <EndScreen
+          playersData={playersData}
+          onGameRestart={() => setGameState("setup")}
+        />
       )}
     </>
   );

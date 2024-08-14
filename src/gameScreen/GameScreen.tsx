@@ -23,8 +23,8 @@ export function GameScreen(props: {
     const hasWon = newScore === 0;
     const newWonAtRound = hasWon ? currentRound : -1;
 
-    if(hasWon) {
-      setPopupPlayer(player)
+    if (hasWon) {
+      setPopupPlayer(player);
       setShowPopup(true);
     }
 
@@ -35,7 +35,10 @@ export function GameScreen(props: {
               ...p,
               score: newScore,
               wonAtRound: newWonAtRound,
-              turns: [...p.turns, { throw: turnScore, score: newScore, isValid: turnValid }],
+              turns: [
+                ...p.turns,
+                { throw: turnScore, score: newScore, isValid: turnValid },
+              ],
             }
           : p,
       ),
@@ -84,25 +87,28 @@ export function GameScreen(props: {
           </tbody>
         </table>
       </div>
-      
-      <button className="absolute right-6 top-4" title="End game" onClick={props.onGameEnd}>
+
+      <button
+        className="absolute right-6 top-4"
+        title="End game"
+        onClick={props.onGameEnd}
+      >
         <FontAwesomeIcon icon={faXmark} size="2xl" />
       </button>
-      
+
       <GamePlayerCard
         key={currentRound + player.id}
         player={player}
         onTurnEnd={handleTurnEnd}
       />
 
-      { showPopup && (
+      {showPopup && (
         <div className="absolute top-0 left-0 right-0 bottom-0 grid place-items-center bg-opacity-40 bg-black p-4">
           <div className="card flex flex-col gap-4">
-            <span className="text-xl playerName">{popupPlayer?.name} has won!</span>
-            <button
-              className="button"
-              onClick={() => setShowPopup(false)}
-            >
+            <span className="text-xl playerName">
+              {popupPlayer?.name} has won!
+            </span>
+            <button className="button" onClick={() => setShowPopup(false)}>
               Continue
             </button>
           </div>
