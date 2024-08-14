@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { GamePlayerData } from "./GameScreen";
+import { PlayerData } from "../playerData";
 
 export function GamePlayerCard(props: {
-  player: GamePlayerData;
+  player: PlayerData;
   onTurnEnd: (score: number) => void;
 }) {
   const [scores, setScores] = useState(["0", "0", "0"]);
@@ -16,13 +16,13 @@ export function GamePlayerCard(props: {
   return (
     <div className="card flex flex-col gap-8 items-center">
       <span className="text-4xl">{props.player.name}</span>
-      <span className="-mt-5">Total Score: {props.player.score}</span>
+      <span className="-mt-5">Score: {props.player.score}</span>
 
       <div className="flex gap-4">
         {scores.map((v, i) => (
           <div key={i}>
             <input
-              className="!w-16"
+              className="!w-16 styled-input"
               type="number"
               autoFocus={i == 0}
               onFocus={(e) => e.target.select()}

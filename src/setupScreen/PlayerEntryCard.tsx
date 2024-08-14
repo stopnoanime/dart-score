@@ -11,6 +11,7 @@ export function PlayerEntryCard(props: {
     <div className="relative">
       <input
         type="text"
+        className="styled-input"
         placeholder="Player's name"
         autoFocus
         onFocus={(e) => e.target.select()}

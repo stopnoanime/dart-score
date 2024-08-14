@@ -1,12 +1,11 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { PlayerData } from "../playerData";
-import { GameType } from "../setupScreen/GameTypeSelector";
 import { GamePlayerCard } from "./GamePlayerCard";
+import { ScoreBoard } from "../endScreen/Scoreboard";
 
 export function GameScreen(props: {
   playersData: PlayerData[];
   onPlayersDataChange: Dispatch<SetStateAction<PlayerData[]>>;
-  gameType: GameType;
   onGameEnd: () => void;
 }) {
   const [currentRound, setCurrentRound] = useState(1);
@@ -76,6 +75,7 @@ export function GameScreen(props: {
           </tbody>
         </table>
       </div>
+
       <GamePlayerCard
         key={currentRound + player.id}
         player={player}
