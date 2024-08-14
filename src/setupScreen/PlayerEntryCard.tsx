@@ -20,7 +20,7 @@ export function PlayerEntryCard(props: {
       />
       <button
         className="rounded-full bg-red-500 w-5 h-5 top-0 right-0 absolute translate-x-1/2 -translate-y-1/2 grid place-items-center"
-        title="delete player"
+        title="Delete player"
         onClick={() => props.onPlayerDelete(props.player.id)}
       >
         <FontAwesomeIcon icon={faXmark} />

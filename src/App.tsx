@@ -35,7 +35,6 @@ export default function App() {
         <GameScreen
           playersData={playersData}
           onPlayersDataChange={setPlayersData}
-          gameType={gameType}
           onGameEnd={() => setGameState("end")}
         />
       )}

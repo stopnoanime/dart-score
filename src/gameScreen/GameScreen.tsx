@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { PlayerData } from "../playerData";
 import { GamePlayerCard } from "./GamePlayerCard";
 import { ScoreBoard } from "../endScreen/Scoreboard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export function GameScreen(props: {
   playersData: PlayerData[];
@@ -75,7 +77,11 @@ export function GameScreen(props: {
           </tbody>
         </table>
       </div>
-
+      
+      <button className="absolute right-6 top-4" title="End game" onClick={props.onGameEnd}>
+        <FontAwesomeIcon icon={faXmark} size="2xl" />
+      </button>
+      
       <GamePlayerCard
         key={currentRound + player.id}
         player={player}
