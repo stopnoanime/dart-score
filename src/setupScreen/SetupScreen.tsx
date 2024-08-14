@@ -1,5 +1,5 @@
 import { GameType, GameTypeSelector } from "./GameTypeSelector";
-import { PlayerData } from "./playerData";
+import { PlayerData } from "../playerData";
 import { PlayersEntryTable } from "./PlayersEntryTable";
 
 export function SetupScreen(props: {

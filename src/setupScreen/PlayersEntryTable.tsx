@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { createPlayerData, PlayerData } from "./playerData";
+import { createPlayerData, PlayerData } from "../playerData";
 import { PlayerEntryCard } from "./PlayerEntryCard";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 

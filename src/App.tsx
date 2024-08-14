@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createPlayerData, PlayerData } from "./setupScreen/playerData";
+import { createPlayerData, PlayerData } from "./playerData";
 import { GameType } from "./setupScreen/GameTypeSelector";
 import { GameScreen } from "./gameScreen/GameScreen";
 import { SetupScreen } from "./setupScreen/SetupScreen";
@@ -14,6 +14,11 @@ export default function App() {
   const [gameType, setGameType] = useState<GameType>("501");
   const [gameState, setGameState] = useState<GameState>("setup");
 
+  function handleGameStart() {
+    setPlayersData(d => d.map(p => ({...p, score: +gameType, wonAtRound: -1, turns: []})))
+    setGameState("game")
+  }
+
   return (
     <>
       {gameState === "setup" && (
@@ -22,20 +27,21 @@ export default function App() {
           onPlayersDataChange={setPlayersData}
           gameType={gameType}
           onGameTypeChange={setGameType}
-          onGameStart={() => setGameState("game")}
+          onGameStart={handleGameStart}
         />
       )}
 
       {gameState === "game" && (
         <GameScreen
           playersData={playersData}
+          onPlayersDataChange={setPlayersData}
           gameType={gameType}
           onGameEnd={() => setGameState("end")}
         />
       )}
 
       {gameState === "end" && (
-        <EndScreen onGameRestart={() => setGameState("setup")} />
+        <EndScreen playersData={playersData} onGameRestart={() => setGameState("setup")} />
       )}
     </>
   );

@@ -20,11 +20,10 @@ export function GamePlayerCard(props: {
 
       <div className="flex gap-4">
         {scores.map((v, i) => (
-          <div>
+          <div key={i}>
             <input
               className="!w-16"
               type="number"
-              key={i}
               autoFocus={i == 0}
               onFocus={(e) => e.target.select()}
               value={v}

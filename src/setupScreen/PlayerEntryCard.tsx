@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { PlayerData } from "./playerData";
+import { PlayerData } from "../playerData";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export function PlayerEntryCard(props: {

@@ -27,5 +27,9 @@ input[type="number"] {
 }
 
 .button {
-  @apply bg-green-700 px-4 py-2 rounded-lg disabled:opacity-50;
+  @apply bg-green-600 px-4 py-2 rounded-lg disabled:opacity-50;
+}
+
+.scoreTable th,.scoreTable td {
+  @apply px-2 py-1 text-center
 }
