@@ -3,6 +3,7 @@ import { PlayerData } from './setupScreen/playerData';
 import { GameType } from './setupScreen/GameTypeSelector';
 import { GameScreen } from './gameScreen/GameScreen';
 import { SetupScreen } from './setupScreen/SetupScreen';
+import { EndScreen } from './endScreen/EndScreen';
 
 type GameState = "setup" | "game" | "end";
 
@@ -22,7 +23,14 @@ export default function App() {
       }
 
       {gameState === "game" && 
-        <GameScreen playersData={playersData} gameType={gameType}/>
+        <GameScreen 
+          playersData={playersData} gameType={gameType} 
+          onGameEnd={() => setGameState("end")}
+        />
+      }
+
+      {gameState === "end" && 
+        <EndScreen onGameRestart={() => setGameState("setup")}/>
       }
     </>
   )
