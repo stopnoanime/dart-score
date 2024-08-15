@@ -3,14 +3,18 @@ import { PlayerData } from "../playerData";
 import { GamePlayerCard } from "./GamePlayerCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { deleteKey, getKey, syncKey } from "../localStorage";
 
 export function GameScreen(props: {
   playersData: PlayerData[];
   onPlayersDataChange: Dispatch<SetStateAction<PlayerData[]>>;
   onGameEnd: () => void;
 }) {
-  const [currentRound, setCurrentRound] = useState(1);
-  const [playerIndex, setPlayerIndex] = useState(0);
+  const [currentRound, setCurrentRound] = useState(getKey("currentRound", 1));
+  const [playerIndex, setPlayerIndex] = useState(getKey("playerIndex", 0));
+
+  syncKey("currentRound", currentRound);
+  syncKey("playerIndex", playerIndex);
 
   const [showPopup, setShowPopup] = useState(false);
   const [popupPlayer, setPopupPlayer] = useState<PlayerData>();
@@ -55,7 +59,7 @@ export function GameScreen(props: {
 
     const startIndex = skipFinishedPlayers(0);
     if (startIndex === props.playersData.length || startIndex === skipIndex)
-      props.onGameEnd();
+      handleGameEnd();
     else setPlayerIndex(startIndex);
   }
 
@@ -67,6 +71,12 @@ export function GameScreen(props: {
       startIndex++;
 
     return startIndex;
+  }
+
+  function handleGameEnd() {
+    deleteKey("currentRound");
+    deleteKey("playerIndex");
+    props.onGameEnd();
   }
 
   return (
@@ -91,7 +101,7 @@ export function GameScreen(props: {
       <button
         className="absolute right-6 top-4"
         title="End game"
-        onClick={props.onGameEnd}
+        onClick={handleGameEnd}
       >
         <FontAwesomeIcon icon={faXmark} size="2xl" />
       </button>

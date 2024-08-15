@@ -16,7 +16,6 @@ export function GameTypeSelector(props: {
           type="radio"
           name="gameType"
           value="501"
-          className="m-0"
           checked={props.gameType == "501"}
           onChange={onChange}
         />
