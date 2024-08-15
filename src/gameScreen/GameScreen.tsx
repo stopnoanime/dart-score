@@ -3,7 +3,7 @@ import { PlayerData } from "../playerData";
 import { GamePlayerCard } from "./GamePlayerCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { deleteKey, getKey, syncKey } from "../localStorage";
+import { deleteKey, getKey, useSyncKey } from "../localStorage";
 
 export function GameScreen(props: {
   playersData: PlayerData[];
@@ -13,8 +13,8 @@ export function GameScreen(props: {
   const [currentRound, setCurrentRound] = useState(getKey("currentRound", 1));
   const [playerIndex, setPlayerIndex] = useState(getKey("playerIndex", 0));
 
-  syncKey("currentRound", currentRound);
-  syncKey("playerIndex", playerIndex);
+  useSyncKey("currentRound", currentRound);
+  useSyncKey("playerIndex", playerIndex);
 
   const [showPopup, setShowPopup] = useState(false);
   const [popupPlayer, setPopupPlayer] = useState<PlayerData>();

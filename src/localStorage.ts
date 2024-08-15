@@ -8,10 +8,10 @@ export function getKey<T>(key: string, defaultValue: T): T {
   return JSON.parse(keyValue) as T;
 }
 
-export function syncKey(key: string, value: any) {
+export function useSyncKey<T>(key: string, value: T) {
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
-  }, [value]);
+  }, [value, key]);
 }
 
 export function deleteKey(key: string) {

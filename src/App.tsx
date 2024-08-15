@@ -4,7 +4,7 @@ import { GameType } from "./setupScreen/GameTypeSelector";
 import { GameScreen } from "./gameScreen/GameScreen";
 import { SetupScreen } from "./setupScreen/SetupScreen";
 import { EndScreen } from "./endScreen/EndScreen";
-import { getKey, syncKey } from "./localStorage";
+import { getKey, useSyncKey } from "./localStorage";
 
 export type GameState = "setup" | "game" | "end";
 
@@ -17,9 +17,9 @@ export default function App() {
   );
   const [gameType, setGameType] = useState<GameType>(getKey("gameType", "501"));
 
-  syncKey("playersData", playersData);
-  syncKey("gameState", gameState);
-  syncKey("gameType", gameType);
+  useSyncKey("playersData", playersData);
+  useSyncKey("gameState", gameState);
+  useSyncKey("gameType", gameType);
 
   function handleGameStart() {
     setPlayersData((d) =>
