@@ -22,7 +22,7 @@ body {
 }
 
 .styled-input {
-  @apply bg-transparent border-2 border-solid border-neutral-800 rounded-lg p-2 w-32;
+  @apply bg-transparent border-2 border-solid border-neutral-800 rounded-lg p-2 w-24 sm:w-32;
 }
 
 .button {
