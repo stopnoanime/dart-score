@@ -5,7 +5,7 @@ export function ScoreBoard(props: { playersData: PlayerData[] }) {
   const rowAmount = Math.max(...props.playersData.map((p) => p.turns.length));
 
   return (
-    <div className="card">
+    <div className="card" style={{ maxHeight: "70vh" }}>
       <table className="scoreTable">
         <thead>
           <tr>
@@ -28,7 +28,7 @@ export function ScoreBoard(props: { playersData: PlayerData[] }) {
         <tbody>
           {[...Array(rowAmount)].map((_, i) => (
             <tr key={i} className="odd:bg-neutral-600">
-              <td>{i + 1}</td>
+              <td>{i}</td>
               {props.playersData.map((p) => (
                 <React.Fragment key={p.id}>
                   <td

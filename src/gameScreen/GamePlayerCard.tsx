@@ -16,7 +16,7 @@ export function GamePlayerCard(props: {
   return (
     <div className="card flex flex-col gap-8 items-center">
       <span className="text-4xl playerName">{props.player.name}</span>
-      <span className="-mt-5">Score: {props.player.score}</span>
+      <span className="-mt-5">Score: {props.player.turns.at(-1)?.score}</span>
 
       <div className="flex gap-4">
         {scores.map((v, i) => (

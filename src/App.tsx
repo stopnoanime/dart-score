@@ -23,7 +23,11 @@ export default function App() {
 
   function handleGameStart() {
     setPlayersData((d) =>
-      d.map((p) => ({ ...p, score: +gameType, wonAtRound: -1, turns: [] })),
+      d.map((p) => ({
+        ...p,
+        won: false,
+        turns: [{ score: +gameType, isValid: true, throw: "-" }],
+      })),
     );
     setGameState("game");
   }

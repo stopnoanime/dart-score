@@ -4,6 +4,7 @@ import { GamePlayerCard } from "./GamePlayerCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { deleteKey, getKey, useSyncKey } from "../localStorage";
+import { ScoreBoard } from "../endScreen/Scoreboard";
 
 export function GameScreen(props: {
   playersData: PlayerData[];
@@ -20,12 +21,12 @@ export function GameScreen(props: {
   const [popupPlayer, setPopupPlayer] = useState<PlayerData>();
 
   const player = props.playersData[playerIndex];
+  const playerScore = props.playersData[playerIndex].turns.at(-1)!.score;
 
   function handleTurnEnd(turnScore: number) {
-    const turnValid = turnScore <= player.score;
-    const newScore = player.score - (turnValid ? turnScore : 0);
+    const turnValid = turnScore <= playerScore;
+    const newScore = playerScore - (turnValid ? turnScore : 0);
     const hasWon = newScore === 0;
-    const newWonAtRound = hasWon ? currentRound : -1;
 
     if (hasWon) {
       setPopupPlayer(player);
@@ -37,11 +38,14 @@ export function GameScreen(props: {
         p.id === player.id
           ? {
               ...p,
-              score: newScore,
-              wonAtRound: newWonAtRound,
+              won: hasWon,
               turns: [
                 ...p.turns,
-                { throw: turnScore, score: newScore, isValid: turnValid },
+                {
+                  throw: String(turnScore),
+                  score: newScore,
+                  isValid: turnValid,
+                },
               ],
             }
           : p,
@@ -66,7 +70,7 @@ export function GameScreen(props: {
   function skipFinishedPlayers(startIndex: number) {
     while (
       startIndex < props.playersData.length &&
-      props.playersData[startIndex].wonAtRound !== -1
+      props.playersData[startIndex].won
     )
       startIndex++;
 
@@ -106,11 +110,14 @@ export function GameScreen(props: {
         <FontAwesomeIcon icon={faXmark} size="2xl" />
       </button>
 
-      <GamePlayerCard
-        key={currentRound + player.id}
-        player={player}
-        onTurnEnd={handleTurnEnd}
-      />
+      <div className="flex gap-8 flex-wrap justify-center max-w-full items-center mt-16">
+        <GamePlayerCard
+          key={currentRound + player.id}
+          player={player}
+          onTurnEnd={handleTurnEnd}
+        />
+        <ScoreBoard playersData={props.playersData} />
+      </div>
 
       {showPopup && (
         <div className="absolute top-0 left-0 right-0 bottom-0 grid place-items-center bg-opacity-40 bg-black p-4">
@@ -118,7 +125,11 @@ export function GameScreen(props: {
             <span className="text-xl playerName">
               {popupPlayer?.name} has won!
             </span>
-            <button className="button" onClick={() => setShowPopup(false)}>
+            <button
+              autoFocus
+              className="button"
+              onClick={() => setShowPopup(false)}
+            >
               Continue
             </button>
           </div>
