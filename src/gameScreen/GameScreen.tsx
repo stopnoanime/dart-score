@@ -52,22 +52,22 @@ export function GameScreen(props: {
       ),
     );
 
-    const newIndex = skipFinishedPlayers(playerIndex + 1);
+    const newIndex = skipWonPlayers(playerIndex + 1);
     if (newIndex === props.playersData.length)
       goToNextRound(hasWon ? playerIndex : -1);
     else setPlayerIndex(newIndex);
   }
 
-  function goToNextRound(skipIndex: number) {
+  function goToNextRound(lastIndex: number) {
     setCurrentRound((r) => r + 1);
 
-    const startIndex = skipFinishedPlayers(0);
-    if (startIndex === props.playersData.length || startIndex === skipIndex)
+    const startIndex = skipWonPlayers(0);
+    if (startIndex === props.playersData.length || startIndex === lastIndex)
       handleGameEnd();
     else setPlayerIndex(startIndex);
   }
 
-  function skipFinishedPlayers(startIndex: number) {
+  function skipWonPlayers(startIndex: number) {
     while (
       startIndex < props.playersData.length &&
       props.playersData[startIndex].won

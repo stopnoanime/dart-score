@@ -1,0 +1,8 @@
+.scoreTable th,
+.scoreTable td {
+  @apply px-2 py-1 text-center;
+}
+
+.scoreTable tbody tr {
+  @apply odd:bg-neutral-600;
+}

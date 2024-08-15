@@ -29,11 +29,6 @@ body {
   @apply bg-green-600 px-4 py-2 rounded-lg disabled:opacity-50 outline-white focus:outline outline-1;
 }
 
-.scoreTable th,
-.scoreTable td {
-  @apply px-2 py-1 text-center;
-}
-
 .playerName {
   @apply overflow-hidden text-ellipsis max-w-full text-center;
 }

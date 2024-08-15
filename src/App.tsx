@@ -10,7 +10,7 @@ export type GameState = "setup" | "game" | "end";
 
 export default function App() {
   const [playersData, setPlayersData] = useState<PlayerData[]>(
-    getKey("playersData", [createPlayerData(0)]),
+    getKey("playersData", [createPlayerData(1)]),
   );
   const [gameState, setGameState] = useState<GameState>(
     getKey("gameState", "setup"),

@@ -11,10 +11,10 @@ export type PlayerTurnData = {
   isValid: boolean;
 }[];
 
-export function createPlayerData(index: number): PlayerData {
+export function createPlayerData(number: number): PlayerData {
   return {
     id: crypto.randomUUID(),
-    name: `Player ${index + 1}`,
+    name: `Player ${number}`,
     won: false,
     turns: [],
   };

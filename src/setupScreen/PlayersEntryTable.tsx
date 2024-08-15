@@ -10,7 +10,7 @@ export function PlayersEntryTable(props: {
   function handlePlayerAdd() {
     props.onPlayersDataChange([
       ...props.playersData,
-      createPlayerData(props.playersData.length),
+      createPlayerData(props.playersData.length + 1),
     ]);
   }
 

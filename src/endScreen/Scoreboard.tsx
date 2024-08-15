@@ -1,5 +1,6 @@
 import React from "react";
 import { PlayerData } from "../playerData";
+import "./scoreboard.css";
 
 export function ScoreBoard(props: { playersData: PlayerData[] }) {
   const rowAmount = Math.max(...props.playersData.map((p) => p.turns.length));
@@ -27,7 +28,7 @@ export function ScoreBoard(props: { playersData: PlayerData[] }) {
         </thead>
         <tbody>
           {[...Array(rowAmount)].map((_, i) => (
-            <tr key={i} className="odd:bg-neutral-600">
+            <tr key={i}>
               <td>{i}</td>
               {props.playersData.map((p) => (
                 <React.Fragment key={p.id}>
